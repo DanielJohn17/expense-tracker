@@ -12,5 +12,5 @@ all: build-frontend start-server
 build-frontend:
 	cd $(FRONTEND_DIR) && bun install && bun run build
 
-start-server: build-frontend
+start-server:
 	cd $(SERVER_DIR) && bun install && bun start
