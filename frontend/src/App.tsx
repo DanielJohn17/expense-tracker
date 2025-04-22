@@ -6,13 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { url } from './utils/url';
 
 function App() {
   const [totalSpent, setTotalSpent] = useState(0);
 
   useEffect(() => {
     const fetchTotal = async () => {
-      const res = await fetch('/api/expenses/total-spent');
+      const res = await fetch(`${url}/api/expenses/total-spent`);
       const data = await res.json();
 
       setTotalSpent(data.total);
