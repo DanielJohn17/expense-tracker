@@ -7,7 +7,7 @@ import { authRoute } from "./routes/auth";
 
 const app = new Hono();
 
-app.use("/api/*", cors());
+app.use("/api/*", cors({ origin: process.env.ORIGIN!, credentials: true }));
 
 app.use("*", logger());
 
