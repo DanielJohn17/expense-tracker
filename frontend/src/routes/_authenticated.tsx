@@ -6,7 +6,7 @@ const Login = () => {
     <div>
       <p>Please log in to access this page.</p>
       <p>
-        <a href="/api/login">Login</a>
+        <a href={process.env.VITE_URL_LOGIN}>Login</a>
       </p>
     </div>
   );

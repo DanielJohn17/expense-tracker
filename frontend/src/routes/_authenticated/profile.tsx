@@ -17,7 +17,7 @@ function Profile() {
     <div className="p-2">
       Hello from Profile!
       <p>Hello {data.user.family_name}</p>
-      <a href="/api/logout" className="ml-3">
+      <a href={process.env.VITE_URL_LOGOUT} className="ml-3">
         Logout
       </a>
     </div>
