@@ -1,12 +1,12 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import { useForm } from '@tanstack/react-form';
-import { api } from '@/lib/api';
+import { useForm } from "@tanstack/react-form";
+import { api } from "@/lib/api";
 
-export const Route = createFileRoute('/_authenticated/create-expense')({
+export const Route = createFileRoute("/_authenticated/create-expense")({
   component: CreateExpense,
 });
 
@@ -15,16 +15,16 @@ function CreateExpense() {
 
   const form = useForm({
     defaultValues: {
-      title: '',
-      amount: 0,
+      title: "",
+      amount: "0",
     },
     onSubmit: async ({ value }) => {
       await new Promise((r) => setTimeout(r, 3000));
 
       const res = api.expenses.$post({ json: value });
-      if (!res) throw new Error('Server Error');
+      if (!res) throw new Error("Server Error");
 
-      navigate({ to: '/expenses' });
+      navigate({ to: "/expenses" });
     },
   });
 
@@ -52,9 +52,9 @@ function CreateExpense() {
                 onChange={(e) => field.handleChange(e.target.value)}
               />
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <em>{field.state.meta.errors.join(', ')}</em>
+                <em>{field.state.meta.errors.join(", ")}</em>
               ) : null}
-              {field.state.meta.isValidating ? 'Validating...' : null}
+              {field.state.meta.isValidating ? "Validating..." : null}
             </>
           )}
         />
@@ -69,12 +69,12 @@ function CreateExpense() {
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 type="number"
-                onChange={(e) => field.handleChange(Number(e.target.value))}
+                onChange={(e) => field.handleChange(e.target.value)}
               />
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <em>{field.state.meta.errors.join(', ')}</em>
+                <em>{field.state.meta.errors.join(", ")}</em>
               ) : null}
-              {field.state.meta.isValidating ? 'Validating...' : null}
+              {field.state.meta.isValidating ? "Validating..." : null}
             </>
           )}
         />
@@ -82,7 +82,7 @@ function CreateExpense() {
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
             <Button className="mt-4" type="submit" disabled={!canSubmit}>
-              {isSubmitting ? '...' : 'Submit'}
+              {isSubmitting ? "..." : "Submit"}
             </Button>
           )}
         />
