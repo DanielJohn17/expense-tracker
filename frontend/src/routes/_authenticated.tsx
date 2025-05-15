@@ -1,20 +1,14 @@
 import { userQueryOptions } from "@/lib/api";
-import { isValidUrl } from "@/lib/utils";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 const Login = () => {
-  const loginUrl = import.meta.env.VITE_URL_LOGIN;
   return (
     <div>
       <p>Please log in to access this page.</p>
       <p>
-      {isValidUrl(loginUrl) ? (
-        <a href={loginUrl} className="ml-3">
+        <a href="/api/login" className="ml-3">
           Login
         </a>
-      ) : (
-        <p>Invalid Login URL</p>
-      )}
       </p>
     </div>
   );

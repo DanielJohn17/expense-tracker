@@ -2,7 +2,7 @@ import { hc } from "hono/client";
 import { type ApiRoutes } from "@server/app";
 import { queryOptions } from "@tanstack/react-query";
 
-const url = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const url = "/";
 
 // Custom fetch function to include credentials
 const customFetch = ((input: RequestInfo | URL, init?: RequestInit) => {
