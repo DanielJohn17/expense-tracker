@@ -1,23 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { api } from '@/lib/api';
-import { useQuery } from '@tanstack/react-query';
+} from "@/components/ui/card";
+import { api } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 
-export const Route = createFileRoute('/_authenticated/')({
+export const Route = createFileRoute("/_authenticated/")({
   component: Index,
 });
 
 const getTotoalSpent = async () => {
-  const res = await api.expenses['total-spent'].$get();
+  const res = await api.expenses["total-spent"].$get();
 
   if (!res.ok) {
-    throw new Error('Server Error');
+    throw new Error("Server Error");
   }
   const data = await res.json();
   return data;
@@ -25,11 +25,11 @@ const getTotoalSpent = async () => {
 
 function Index() {
   const { isPending, error, data } = useQuery({
-    queryKey: ['get-total-spent'],
+    queryKey: ["get-total-spent"],
     queryFn: getTotoalSpent,
   });
 
-  if (error) return 'An error has occurred: ' + (error as Error).message;
+  if (error) return "An error has occurred: " + (error as Error).message;
 
   return (
     <Card className="w-[350px] m-auto">
@@ -37,7 +37,9 @@ function Index() {
         <CardTitle>Total Spent</CardTitle>
         <CardDescription>The total amount you've spent</CardDescription>
       </CardHeader>
-      <CardContent>{isPending ? '...' : data.total}</CardContent>
+      <CardContent>
+        {isPending ? "..." : data.total ? data.total : "No data available"}
+      </CardContent>
     </Card>
   );
 }
