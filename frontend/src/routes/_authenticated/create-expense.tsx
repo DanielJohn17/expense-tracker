@@ -5,6 +5,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 import { useForm } from "@tanstack/react-form";
 import { api } from "@/lib/api";
+import { createExpenseSchema } from "@server/sharedTypes";
 
 export const Route = createFileRoute("/_authenticated/create-expense")({
   component: CreateExpense,
@@ -19,8 +20,6 @@ function CreateExpense() {
       amount: "0",
     },
     onSubmit: async ({ value }) => {
-      await new Promise((r) => setTimeout(r, 3000));
-
       const res = api.expenses.$post({ json: value });
       if (!res) throw new Error("Server Error");
 
@@ -41,6 +40,14 @@ function CreateExpense() {
       >
         <form.Field
           name="title"
+          validators={{
+            onChange:(values)=> {
+
+              const result = createExpenseSchema.shape.title.safeParse(values.value)
+              return result.success
+              ? undefined : result.error.errors.map((error) => error.message)
+            }
+          }}
           children={(field) => (
             <>
               <Label htmlFor={field.name}>Title</Label>
@@ -60,6 +67,13 @@ function CreateExpense() {
         />
         <form.Field
           name="amount"
+          validators={{
+            onChange:(values)=> {
+              const result = createExpenseSchema.shape.amount.safeParse(values.value)
+              return result.success
+              ? undefined : result.error.errors.map((error) => error.message)
+            }
+          }}
           children={(field) => (
             <>
               <Label htmlFor={field.name}>Amount</Label>
