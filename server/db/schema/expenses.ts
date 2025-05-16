@@ -5,6 +5,7 @@ import {
   numeric,
   index,
   timestamp,
+  date,
 } from "drizzle-orm/pg-core";
 
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
@@ -17,6 +18,7 @@ export const expenses = pgTable(
     userId: text("user_id").notNull(),
     title: text("title").notNull(),
     amount: numeric("amount", { precision: 12, scale: 2 }),
+    date: date("date").notNull(),
     createdAt: timestamp("created_at").defaultNow(),
   },
   (expenses) => {
