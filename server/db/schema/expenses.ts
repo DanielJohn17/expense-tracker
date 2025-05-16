@@ -33,6 +33,6 @@ export const insertExpenseSchema = createInsertSchema(expenses, {
     .max(100, "Title must be at most 100 characters"),
   amount: z
     .string()
-    .regex(/^\d+(\.\d{1,2})?$/, "Amount must be a positive number"),
+    .regex(/^\d+(\.\d{1,2})?$/, "Amount must be a valid monetary value"),
 });
 export const selectExpensesSchema = createSelectSchema(expenses);
