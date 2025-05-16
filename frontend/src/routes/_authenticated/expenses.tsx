@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -7,13 +7,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
-import { api } from '@/lib/api';
-import { useQuery } from '@tanstack/react-query';
-import { createFileRoute } from '@tanstack/react-router';
+import { api } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_authenticated/expenses')({
+export const Route = createFileRoute("/_authenticated/expenses")({
   component: Expenses,
 });
 
@@ -21,7 +21,7 @@ const getAllExpenses = async () => {
   const res = await api.expenses.$get();
 
   if (!res.ok) {
-    throw new Error('Server Error');
+    throw new Error("Server Error");
   }
   const data = await res.json();
   return data;
@@ -29,11 +29,11 @@ const getAllExpenses = async () => {
 
 function Expenses() {
   const { isPending, error, data } = useQuery({
-    queryKey: ['get-all-expenses'],
+    queryKey: ["get-all-expenses"],
     queryFn: getAllExpenses,
   });
 
-  if (error) return 'An error has occurred: ' + (error as Error).message;
+  if (error) return "An error has occurred: " + (error as Error).message;
   return (
     <div className="p-2 max-w-3xl m-auto">
       <Table>
@@ -43,6 +43,7 @@ function Expenses() {
             <TableHead className="w-[100px]">Id</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Amount</TableHead>
+            <TableHead>Date</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -67,6 +68,7 @@ function Expenses() {
                   <TableCell className="font-medium">{expense.id}</TableCell>
                   <TableCell>{expense.title}</TableCell>
                   <TableCell>{expense.amount}</TableCell>
+                  <TableCell>{expense.date.split("T")}</TableCell>
                 </TableRow>
               ))}
         </TableBody>
