@@ -34,13 +34,20 @@ const getAllExpenses = async () => {
 };
 
 export const createExpense = async ({ value }: { value: CreateExpense }) => {
-  await new Promise((r) => setTimeout(r, 3000));
   const res = await api.expenses.$post({ json: value });
   if (!res.ok) throw new Error("Server Error");
 
   const newExpense = await res.json();
 
   return newExpense;
+};
+
+export const deleteExpense = async ({ id }: { id: number }) => {
+  const res = await api.expenses[":id{[0-9]+}"].$delete({
+    param: { id: id.toString() },
+  });
+
+  if (!res.ok) throw new Error("Server Error");
 };
 
 export const userQueryOptions = queryOptions({
