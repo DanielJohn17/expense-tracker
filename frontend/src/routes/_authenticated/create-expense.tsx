@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
+import { toast } from "sonner";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 import { useQueryClient } from "@tanstack/react-query";
@@ -45,8 +46,15 @@ function CreateExpense() {
           ...existingExpenses,
           expenses: [newExpense, ...existingExpenses.expenses],
         });
+
+        toast("Expense Created", {
+          description: `Successfully created new expense: ${newExpense.title}`,
+        });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        // handle later
+        toast("Error", {
+          description: `Failed to create new expense`,
+        });
       } finally {
         queryClient.setQueryData(loadingCreateExpenseQueryOptions.queryKey, {});
       }
