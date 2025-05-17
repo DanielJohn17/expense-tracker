@@ -14,7 +14,6 @@ An expense tracker application built with **Bun**, **Hono**, **Neon PostgreSQL**
   - [Installation](#installation)
   - [Environment Variables](#environment-variables)
 - [Technologies Used](#technologies-used)
-- [License](#license)
 
 ---
 
@@ -98,7 +97,3 @@ VITE_API_URL=/
 - **ORM**: Drizzle
 - **Authentication**: Kinde
 - **Styling**: Tailwind CSS
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](./LICENCE) file for details.
